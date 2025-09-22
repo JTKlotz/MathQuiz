@@ -23,16 +23,12 @@ void CreateQuestionsFile(string questionsPath)
 	ofs.open(questionsPath);
 	for (int i = 0; i < size; i++)
 	{
-		ofs << questions[i] << "\n";
+		ofs << questions[i] << "\n";//write contents of the questions array to a file
 	}
 
-	ofs.close();
+	ofs.close();//close writer
 }
 
-vector<string> StoreQuestionsVector()
-{
-
-}
 
 int main()
 {
@@ -40,34 +36,28 @@ int main()
 	string quizResultsPath = "c:\\Temp\\QuizResults.txt";
 
 	
-
+	//vector to hold quiz questions
 	vector<string> storedQuestions;
-
+	//vector to hold users response to the question
 	vector<string> results;
 
 
-
+	//create questions file
 	CreateQuestionsFile(questionsPath);
-	
-	
-	
-	string question;
 
-	ifstream ifs;
-	ifs.open(questionsPath);
-	while (getline(ifs, question))
+	
+	
+	string question;//to store the question
+
+	ifstream ifs;//create reader
+	ifs.open(questionsPath);//open file
+	while (getline(ifs, question))//read each line and store it in the question variable
 	{
-		storedQuestions.push_back(question);
+		storedQuestions.push_back(question);//store the question to a vector
 	}
 	
-	ifs.close();
-
-	for (const string& i : storedQuestions)
-	{
-		cout << i << "\n";
-	}
-	cout << "\n";
-
+	ifs.close();//close the reader
+	
 
 	//initialize the random number generator
 	srand(time(NULL));
@@ -76,23 +66,28 @@ int main()
 	{
 		// get a random number between 1 & 10
 		int randomNumber = rand() % 10 + 1;
-
-		string Q = (storedQuestions[(randomNumber - 1)] + " = ");
-			cout << Q;
-		string answer;
-		cin >> answer;
-		results.push_back(Q+answer);
+		string answer;//to store the users answer as a string
+		string Q = (storedQuestions[(randomNumber - 1)] + " = ");//to store the quiz question
+		cout << "Question " << (i+1) << ": " + Q + "\n";
+		cout << "Enter your answer: ";
+		cin >> answer; 
+		results.push_back(Q+answer);//add question and users answer to vector
 		cout << "\n";
+
+		if (i == 2)//display after the final question
+		{
+			cout << "Results saved to QuizResults.txt";
+		}
 	}
 	
-	ofstream newofs;
-	newofs.open(quizResultsPath);
-	for (const string& j : results)
+	ofstream ofs;//create writer
+	ofs.open(quizResultsPath);//open file
+	for (const string& j : results)//write contents of the vector to the file
 	{
-		newofs << j << "\n";
+		ofs << j << "\n";
 	}
 
-	newofs.close();
+	ofs.close();//close writer
 	
 	
 
