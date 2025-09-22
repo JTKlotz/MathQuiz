@@ -65,7 +65,7 @@ int main()
 	for (int i = 0; i < 3; i++)
 	{
 		// get a random number between 1 & 10
-		int randomNumber = rand() % 10 + 1;
+		int randomNumber = rand() % storedQuestions.size();
 		string answer;//to store the users answer as a string
 		string Q = (storedQuestions[(randomNumber - 1)] + " = ");//to store the quiz question
 		cout << "Question " << (i+1) << ": " + Q + "\n";
